@@ -1,0 +1,15 @@
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.image-fill {
+  width: 100%;
+}
