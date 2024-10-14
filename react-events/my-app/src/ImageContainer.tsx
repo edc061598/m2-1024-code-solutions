@@ -2,25 +2,27 @@ import './ImageContainer.css';
 import { useState } from 'react';
 
 type Props = {
-  src: string[];
+  srcs: string[];
 };
 
-export function ImageContainer({ src }: Props) {
-  const [index, setIndex] = useState(0);
+export function ImageContainer({ srcs }: Props) {
+  const [imageIndex, setImageIndex] = useState(0);
+
   function handleClick() {
-    if (index > src.length - 1) {
-      setIndex(0);
+    if (imageIndex >= srcs.length - 1) {
+      setImageIndex(0);
     } else {
-      setIndex(index + 1);
+      setImageIndex(imageIndex + 1);
     }
   }
+
   return (
     <div className="d-flex justify-content-center">
       <div className="width-50 ">
         <img
           onClick={handleClick}
           className="image-fill"
-          src={src[index]}
+          src={srcs[imageIndex]}
           alt="space-image"
         />
       </div>

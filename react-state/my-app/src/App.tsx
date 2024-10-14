@@ -11,7 +11,7 @@ const imagesSrc = [
   '/starry-sky.jpeg',
   '/blue_eyes_white_dragon__anime__by_holycrapwhitedragon-db48lo4.jpg',
 ];
-const imageCap = ['Mugetsu', 'Starry sky photo', 'Blue Eyes White Dragon'];
+const captions = ['Mugetsu', 'Starry sky photo', 'Blue Eyes White Dragon'];
 const imageDescrip = [
   'Ichigo with his newest form',
   'Starry Sky was created by Van Gogh.',
@@ -24,7 +24,7 @@ export default function App() {
     <>
       <Header text={headerText} />
       <ImageContainer src={imagesSrc} />
-      <ImageCaption captions={imageCap} />
+      <ImageCaption captions={captions} />
       <ImageDescription descriptions={imageDescrip} />
       <ButtonContainer label={buttonLabel} />
     </>
