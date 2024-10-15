@@ -1,11 +1,15 @@
 type Props = {
-  label: string;
+  label: string[];
+  onButtonClick: () => void;
 };
 
-export function ButtonContainer({ label }: Props) {
+export function ButtonContainer({ label, onButtonClick }: Props) {
+  /* function handleClick(){
+    console.log('The button was clicked');
+  }*/
   return (
     <div>
-      <button>{label}</button>
+      <button onClick={onButtonClick}>{label}</button>
     </div>
   );
 }
