@@ -1,0 +1,38 @@
+.switch{
+  border-radius:50px ;
+  background-color: whitesmoke;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+}
+
+.slider-background{
+
+  width: 200px;
+  height: 100px;
+  border-radius: 75px;
+  transform: X(0.25px);
+  position: relative;
+  cursor: pointer;
+}
+
+.off{
+  background-color: lightgray;
+}
+
+.on{
+  background-color: green;
+}
+
+.right{
+  left: 100px;
+}
+
+.left {
+  left: 0px;
+}
+
+input[type="checkbox"]{
+  display: none;
+  position: absolute;
+}
