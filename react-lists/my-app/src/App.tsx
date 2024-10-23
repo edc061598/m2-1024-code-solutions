@@ -9,11 +9,6 @@ const pokedex = [
   { number: '039', name: 'Jigglypuff' },
 ];
 
-/* const pokedexList = pokedex.map(pokemon =>
-      <li key={pokemon.number}>
-        {pokemon.name}
-        </li>
-      ); */
 export function Pokemon() {
   return (
     <>
