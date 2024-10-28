@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Indicators.css';
 type Props = {
   items: string[];
   currentIndex: number;
@@ -19,5 +19,5 @@ export function Indicators({ items, currentIndex, onSelect }: Props) {
     );
   }
 
-  return <div className="indicators">[buttons]</div>;
+  return <div className="indicators">{buttons}</div>;
 }

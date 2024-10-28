@@ -1,0 +1,8 @@
+.indicator-button {
+  margin: 0 5px;
+}
+
+.indicator-button.active {
+  background-color: white;
+  color: green;
+}
