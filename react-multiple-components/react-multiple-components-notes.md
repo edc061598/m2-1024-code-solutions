@@ -5,10 +5,11 @@
 Answer the following questions in the provided markdown file before turning in this exercise:
 
 - What are the phases in the React design process?
-
+  Initializing, Mounting, Updating and Unmounting.
 - How does data flow in React?
-
+  Data flows in a single directiong through the components that are created in React.
 - How can children components modify state in their parents?
+  By passing event handlers down so that the children components can change the parent's state. Either controlled or uncontrolled.
 
 ## Notes
 
