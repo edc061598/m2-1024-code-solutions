@@ -1,33 +1,31 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '../../../../../vite.svg';
 import './App.css';
+import { Accordion } from './Accordion';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const topics = [
+    {
+      id: 1,
+      title: 'Hypertext Markup Language',
+      content:
+        'Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript.',
+    },
+    {
+      id: 3,
+      title: 'Cascading Style Sheets',
+      content:
+        'Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.',
+    },
+    {
+      id: 9,
+      title: 'JavaScript',
+      content:
+        'JavaScript (/ˈdʒɑːvəˌskrɪpt/), often abbreviated as JS, is a high-level, interpreted scripting language that conforms to the ECMAScript specification. JavaScript has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.',
+    },
+  ];
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Accordion topics={topics} />
     </>
   );
 }

@@ -43,3 +43,11 @@
 .read-the-docs {
   color: #888;
 }
+
+button {
+  background-color: lightgray;
+  color: black;
+  display: inline-block;
+  width: 50%;
+  height: 7.5vh;
+}
