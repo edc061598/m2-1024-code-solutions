@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+}
+
+.fa-check {
+  color: green;
+}
+
+.fa-times {
+  color: red;
+}
+
+.error-message {
+  color: red;
+}
