@@ -1,33 +1,40 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '../../../../../vite.svg';
+import { useState, useRef } from 'react';
 import './App.css';
+import { Popup } from './Popup';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const buttonRef = useRef(null);
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <div className="App">
+        <button type="button" onClick={toggleMenu} ref={buttonRef}>
+          {isOpen ? 'Close' : 'Pop up!'}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+        <Popup
+          isOpen={isOpen}
+          positionTo={buttonRef.current}
+          onClose={closeMenu}
+          opacity={0.7}>
+          <ul className="menu">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+          </ul>
+        </Popup>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
