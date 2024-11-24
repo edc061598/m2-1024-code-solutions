@@ -2,7 +2,7 @@
  * Returns a new array that contains only the even numbers in the given array.
  */
 export function evenNumbers(numbers: number[]): number[] {
-  return numbers.filter((n) => n % 2);
+  return numbers.filter((n) => n % 2 === 0);
 }
 
 /**
@@ -17,7 +17,7 @@ export function toDollars(amount: number): string {
  * given divisor. Does not modify the original array.
  */
 export function divideBy(numbers: number[], divisor: number): number[] {
-  for (let i = 1; i < numbers.length; i++) {
+  for (let i = 0; i < numbers.length; i++) {
     numbers[i] = numbers[i] / divisor;
   }
   return numbers;
@@ -33,7 +33,7 @@ export function multiplyBy(
 ): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   Object.entries(obj).forEach(([key, value]) => {
-    result[key] = Number(value) * multiplier + 1;
+    result[key] = Number(value) * multiplier;
   });
   return result;
 }
