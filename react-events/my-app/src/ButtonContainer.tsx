@@ -4,9 +4,6 @@ type Props = {
 };
 
 export function ButtonContainer({ label, onButtonClick }: Props) {
-  /* function handleClick(){
-    console.log('The button was clicked');
-  }*/
   return (
     <div>
       <button onClick={onButtonClick}>{label}</button>

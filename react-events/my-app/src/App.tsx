@@ -18,7 +18,7 @@ const buttonLabel = ['Click for Next Image'];
 
 export function App() {
   const [buttonIndex, setButtonIndex] = useState(0);
-  function captionClick() {
+  function handleClick() {
     if (buttonIndex >= imageSrc.length - 1) {
       setButtonIndex(0);
     } else {
@@ -26,45 +26,22 @@ export function App() {
     }
   }
 
-  function containerClick() {
-    if (buttonIndex >= imageSrc.length - 1) {
-      setButtonIndex(0);
-    } else {
-      setButtonIndex(buttonIndex + 1);
-    }
-  }
-
-  function descriptionClick() {
-    if (buttonIndex >= imageDescrip.length - 1) {
-      setButtonIndex(0);
-    } else {
-      setButtonIndex(buttonIndex + 1);
-    }
-  }
-
-  function buttonClick() {
-    if (buttonIndex >= imageDescrip.length - 1) {
-      setButtonIndex(0);
-    } else {
-      setButtonIndex(buttonIndex + 1);
-    }
-  }
   return (
     <>
       <Header text={headerText} />
       <ImageContainer
-        onContainerClick={containerClick}
+        onContainerClick={handleClick}
         srcs={imageSrc[buttonIndex]}
       />
       <ImageCaption
-        onCaptionClick={captionClick}
+        onCaptionClick={handleClick}
         captions={imageCap[buttonIndex]}
       />
       <ImageDescription
-        onDescriptionClick={descriptionClick}
+        onDescriptionClick={handleClick}
         descs={imageDescrip[buttonIndex]}
       />
-      <ButtonContainer onButtonClick={buttonClick} label={buttonLabel} />
+      <ButtonContainer onButtonClick={handleClick} label={buttonLabel} />
     </>
   );
 }
