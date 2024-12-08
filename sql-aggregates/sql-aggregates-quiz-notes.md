@@ -5,8 +5,9 @@
 Answer the following questions in the provided markdown file before turning in this exercise:
 
 - What are some examples of aggregate functions?
-
+  count, sum, boolean
 - What is the purpose of a `group by` clause?
+  Separate rows into groups and perform functions on those group of rows
 
 ## Notes
 
