@@ -1,5 +1,6 @@
 import express from 'express';
 import { errorMiddleware, ClientError } from './lib/index.js';
+import { nextTick } from 'process';
 
 type Note = {
   noteId: number;
@@ -8,22 +9,29 @@ type Note = {
 
 const app = express();
 
-app.get('/api/notes', async (req, res) => {
-  try {
+app.use(express.json());
+
+app.get('/api/notes', async (req, res, next) => {
+try {
     const notes = await readNotes();
     res.send(notes);
   } catch (err) {
+    /*
     console.error(err);
     res.status(500).send({ error: 'an unexpected error occurred' });
+    next(new Error('What bad luck! Read the error.'));
+    */
+   next(err);
   }
 });
 
-app.post('/api/notes', async (req, res) => {
+app.post('/api/notes', async (req, res,next) => {
   try {
     const { content } = req.query;
     if (content === undefined) {
-      res.status(400).send({ error: 'content is required' });
-      return;
+      // res.status(400).send({ error: 'content is required' });
+      // return;
+      throw new ClientError(400, 'notes is required');
     }
     const note = {
       noteId: Math.floor(100 * Math.random()),
@@ -32,22 +40,28 @@ app.post('/api/notes', async (req, res) => {
     await writeNote(note);
     res.send(note);
   } catch (err) {
+    /*
     console.error(err);
     res.status(500).send({ error: 'an unexpected error occurred' });
+    next(new Error('This is the error post!'));
+    */
+   next(err);
   }
 });
 
-app.put('/api/notes/:noteId', async (req, res) => {
+app.put('/api/notes/:noteId', async (req, res, next) => {
   try {
     const { noteId } = req.params;
     const { content } = req.query;
     if (noteId === undefined) {
-      res.status(400).send({ error: 'noteId is required' });
-      return;
+      // res.status(400).send({ error: 'noteId is required' });
+      // return;
+      throw new ClientError(400, 'noteId is required');
     }
     if (content === undefined) {
-      res.status(400).send({ error: 'content is required' });
-      return;
+      // res.status(400).send({ error: 'content is required' });
+      // return;
+      throw new ClientError(400, 'notes is required');
     }
     const note = {
       noteId: +noteId,
@@ -56,23 +70,32 @@ app.put('/api/notes/:noteId', async (req, res) => {
     await writeNote(note);
     res.send(note);
   } catch (err) {
+    /*
     console.error(err);
     res.status(500).send({ error: 'an unexpected error occurred' });
+    next(new Error('this is the put error!'));
+    */
+   next(err);
   }
 });
 
-app.delete('/api/notes/:noteId', async (req, res) => {
+app.delete('/api/notes/:noteId', async (req, res, next) => {
   try {
     const { noteId } = req.params;
     if (noteId === undefined) {
-      res.status(400).send({ error: 'noteId is required' });
-      return;
+      // res.status(400).send({ error: 'noteId is required' });
+      // return;
+      throw new ClientError(400, 'noteId is required');
     }
     await deleteNote(+noteId);
     res.send(`deleted ${noteId}`);
   } catch (err) {
+    /*
     console.error(err);
     res.status(500).send({ error: 'an unexpected error occurred' });
+    next(new Error('this is the delete error!'));
+    */
+   next(err);
   }
 });
 
