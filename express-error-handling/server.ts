@@ -42,7 +42,7 @@ app.put('/api/notes/:noteId', async (req, res, next) => {
     const { content } = req.query;
     if (
       Number.isNaN(noteId) ||
-      !Number.isInteger(noteId) ||
+      !Number.isInteger(+noteId) ||
       Number(noteId) < 1
     ) {
       throw new ClientError(400, 'noteId is required');
