@@ -1,0 +1,16 @@
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dot-button {
+  width: 15px;
+  height: 25px;
+  border-radius: 25px;
+}
+
+.dot-button.active {
+  background-color: green;
+  border: none;
+}
