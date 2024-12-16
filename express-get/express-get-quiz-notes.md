@@ -5,8 +5,9 @@
 Answer the following questions in the provided markdown file before turning in this exercise:
 
 - What is the purpose of the HTTP `GET` method?
-
+  Getting data from a server and returning it.
 - What is the appropriate `Content-Type` header for HTTP messages that contain JSON in their bodies?
+  application JSON is the preferred content type for the http messages.
 
 ## Notes
 
