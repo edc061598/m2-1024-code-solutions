@@ -1,0 +1,6 @@
+        List of relations
+ Schema |  Name  | Type  | Owner 
+--------+--------+-------+-------
+ public | grades | table | dev
+(1 row)
+
