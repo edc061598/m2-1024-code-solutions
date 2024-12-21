@@ -4,6 +4,8 @@ import { UserDetails } from './UserDetails';
 import { UserCard } from './UserCard';
 import './Users.css';
 
+const URL = 'https://jsonplaceholder.typicode.com/users';
+
 export type User = {
   id: number;
   name: string;
@@ -17,6 +19,22 @@ export function Users() {
   const [error, setError] = useState<unknown>();
   const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User>();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(URL);
+        const data = await response.json();
+        setUsers(data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>;
