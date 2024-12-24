@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars -- Remove me */
-/* eslint-disable @typescript-eslint/no-empty-function -- Remove me */
+
 import { useEffect, useState } from 'react';
 import { PageTitle } from './PageTitle';
 import { TodoList } from './TodoList';
@@ -19,13 +18,64 @@ export function Todos() {
   const [error, setError] = useState<unknown>();
 
   /* Implement useEffect to fetch all todos. Hints are at the bottom of the file. */
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const URL = '/api/todos';
+    const fetchData = async() => {
+      try {
+        const response = await fetch(URL);
+        const data:Todo[] = await response.json();
+        setTodos(data);
+        setIsLoading(false);
+      } catch(err){
+        setError(err);
+      }
+    }
+    fetchData();
+  }, []);
 
   /* Implement addTodo to add a new todo. Hints are at the bottom of the file. */
-  async function addTodo(newTodo: UnsavedTodo) {}
+  async function addTodo(newTodo: UnsavedTodo) {
+  const URL = '/api/todos';
+
+  try{
+    const response = await fetch(URL, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newTodo),
+    })
+    const data = await response.json();
+    setTodos((todos) => [...todos, data]);
+    setIsLoading(false);
+  } catch(err){
+    setError(err);
+  }
+}
 
   /* Implement toggleCompleted to toggle the completed state of a todo. Hints are at the bottom of the file. */
-  async function toggleCompleted(todo: Todo) {}
+  async function toggleCompleted(todo: Todo) {
+     const URL = `/api/todos/${todo.todoId}`;
+     const updatedTodo = {...todo, isCompleted: !todo.isCompleted};
+     try {
+      const response = await fetch(URL, {
+        method: 'put',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(updatedTodo),
+      })
+      const data = await response.json();
+      const updatedTodos = todos.map(newTodo => newTodo.todoId === todo.todoId ?
+        {...newTodo, isCompleted: updatedTodo.isCompleted} : newTodo);
+      setTodos(updatedTodos);
+      setIsLoading(false);
+    }catch(err){
+      setError(err);
+    }
+}
+
 
   if (isLoading) {
     return <div>Loading...</div>;
