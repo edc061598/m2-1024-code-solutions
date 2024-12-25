@@ -1,5 +1,24 @@
-import { Todos } from './components/Todos';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import { ProductDetails } from './components/ProductDetails';
+import { Catalog } from './components/Catalog';
+import { About } from './components/About';
+import { Header } from './components/Header';
+import { NotFound } from './components/NotFound';
 
 export function App() {
-  return <Todos />;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route path="/catalog" index element={<Catalog />} />
+          <Route path="details/:productId" element={<ProductDetails />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </>
+  );
 }
+
+export default App;

@@ -13,5 +13,8 @@
     "tsc:client": "tsc --project client",
     "tsc:server": "tsc --project server",
     "tsc": "npm-run-all --continue-on-error tsc:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2"
   }
 }
