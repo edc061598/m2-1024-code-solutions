@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { type Product, readItems } from './lib';
 import { useEffect, useState } from 'react';
 import { Header } from './Header';
@@ -24,6 +24,7 @@ export function Catalog() {
       try {
         // const values = await readItems();
         const response = await fetch(URL);
+        console.log(response);
         const data: Product[] = await response.json();
         setProducts(data);
       } catch (error) {

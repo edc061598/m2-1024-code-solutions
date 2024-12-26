@@ -5,7 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 
 
 export function ProductDetails() {
-  const { productId } = useParams<{ productId: number }>();
+  // const { productId } = useParams<{ productId: number }>();
   const [product, setProduct] = useState<Product>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
@@ -37,7 +37,7 @@ export function ProductDetails() {
     // if (productId) {
     //   loadProduct(productId);
     // }
-    loadProduct(productId);
+    loadProduct();
   }, [productId]);
 
   if (isLoading) {
