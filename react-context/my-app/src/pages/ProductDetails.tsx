@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { readProduct, type Product, toDollars } from '../lib';
+import { CartContext } from '../components/CartContext';
 
 export function ProductDetails() {
   const { productId } = useParams();
@@ -26,8 +27,11 @@ export function ProductDetails() {
     }
   }, [productId]);
 
+  const { addToCart } = useContext(CartContext);
+
   function handleAddToCart() {
     if (!product) throw new Error('Should never happen');
+    addToCart(product);
     alert(`Added ${product?.name} to cart`);
     navigate('/');
   }
