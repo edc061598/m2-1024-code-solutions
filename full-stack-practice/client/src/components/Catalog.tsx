@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { type Product} from '../../../server';
+import { type Product } from '../../../server';
 import { useEffect, useState } from 'react';
-
-
 
 export function Catalog() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -62,7 +60,7 @@ function ProductCard({ product }: CardProps) {
       <Link
         to={`/products/${product.productId}`}
         className="block cursor-pointer text-gray-900 rounded border border-gray-300 mb-4 ">
-        <div className="w-64 h-64 bg-gray-200 mb-4 relative place-items-center place-content-center">
+        <div className="w-64 h-64 bg-gray-200 mb-4  overflow-hidden">
           <img
             src={product.imageUrl}
             alt={product.name}
@@ -70,7 +68,7 @@ function ProductCard({ product }: CardProps) {
           />
         </div>
         <h5 className="font-bold mb-3">{product.name}</h5>
-        <p className="text-xl text-center">
+        <p className="text-xl text-center mb-2">
           ${(product.price / 100).toFixed(2)}
         </p>
         <p className="text-sm text-center"> {product.shortDescription}</p>
