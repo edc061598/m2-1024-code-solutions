@@ -13,7 +13,6 @@ export function Catalog() {
     async function loadProduct() {
       const URL = '/api/products';
       try {
-        // const values = await readItems();
         const response = await fetch(URL);
         console.log(response);
         const data: Product[] = await response.json();

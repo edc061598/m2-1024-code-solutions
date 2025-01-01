@@ -18,26 +18,12 @@ export function ProductDetails() {
         const data = await response.json();
         console.log(data);
         setProduct(data);
-        // const foundProduct = products.find(
-        //   (product) => product.productId.toString() === productId
-        // );
-
-        // if (!foundProduct) {
-        //   throw new Error('Product not found');
-        // }
-        // if (productId) {
-        //   setIsLoading(true);
-        // }
-        // setProduct(foundProduct);
       } catch (err) {
         setError(err);
       } finally {
         setIsLoading(false);
       }
     }
-    // if (productId) {
-    //   loadProduct(productId);
-    // }
     loadProduct();
   }, [productId]);
 
@@ -56,7 +42,7 @@ export function ProductDetails() {
     return (
       <>
         <div className="product-details text-left">
-          <Link to="/catalog" className="flex items-center text-white">
+          <Link to="/" className="flex items-center text-white">
             &lt; Back to Catalog
           </Link>
         </div>
