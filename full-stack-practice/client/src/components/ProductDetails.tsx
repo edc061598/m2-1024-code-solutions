@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
-import { type Product} from './Catalog';
+import {type Product } from '../../../server';
 import { useParams, Link } from 'react-router-dom';
 
 
 
 export function ProductDetails() {
-  // const { productId } = useParams<{ productId: number }>();
+  const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>();
 
   useEffect(() => {
-    async function loadProduct(productId: number) {
+    async function loadProduct() {
       const URL = `/api/products/${productId}`;
       try {
         const response = await fetch(URL);
         const data = await response.json();
+        console.log(data);
         setProduct(data);
         // const foundProduct = products.find(
         //   (product) => product.productId.toString() === productId

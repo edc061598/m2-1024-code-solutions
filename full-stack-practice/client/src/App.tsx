@@ -11,8 +11,8 @@ export function App() {
     <>
         <Routes>
           <Route path="/" element={<Header />}>
-            <Route path="/catalog" index element={<Catalog />} />
-            <Route path="details/:productId" element={<ProductDetails />} />
+            <Route path="/" index element={<Catalog />} />
+            <Route path="products/:productId" element={<ProductDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Route>

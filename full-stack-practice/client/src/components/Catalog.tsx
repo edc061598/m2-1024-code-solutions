@@ -1,17 +1,8 @@
 import { Link } from 'react-router-dom';
-// import { type Product, readItems } from './lib';
+import { type Product} from '../../../server';
 import { useEffect, useState } from 'react';
-import { Header } from './Header';
-import { ProductDetails } from './ProductDetails';
-// import { Product } from '../../react-catalog/lib';
-// import { Link } from 'react-router-dom';
-export type Product = {
-  productId: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-  shortDescription:string;
-}
+
+
 
 export function Catalog() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -70,7 +61,7 @@ function ProductCard({ product }: CardProps) {
   return (
     <div className="product-card">
       <Link
-        to={`/details/${product.productId}`}
+        to={`/products/${product.productId}`}
         className="block cursor-pointer text-gray-900 rounded border border-gray-300 mb-4 ">
         <div className="w-64 h-64 bg-gray-200 mb-4 relative place-items-center place-content-center">
           <img
