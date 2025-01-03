@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars -- Remove me */
-import { type FormEvent, useState } from 'react';
+import { nextTick } from 'process';
+import { type FormEvent, useState, useEffect } from 'react';
 
 type Image = {
   imageId: number;
@@ -8,7 +9,22 @@ type Image = {
 };
 
 export function UploadForm() {
+  const [imageFile, setImageFile] = useState<Image | null>(null);
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const URL = '/api/uploads';
+    try {
+      const response = await fetch(URL, {
+        method: 'post',
+        body: formData,
+      });
+      const data: Image = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
+
     /* Prevent the browser's default behavior for form submissions.
      * Create a `new` FormData object from the `event`.
      *
