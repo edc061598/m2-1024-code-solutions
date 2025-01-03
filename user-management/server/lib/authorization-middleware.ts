@@ -2,6 +2,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { ClientError } from './client-error.js';
+import { nextTick } from 'process';
 
 const hashKey = process.env.TOKEN_SECRET ?? '';
 if (!hashKey) throw new Error('TOKEN_SECRET not found in env');
@@ -12,7 +13,29 @@ export function authMiddleware(
   next: NextFunction
 ): void {
   /* your code here */
+try{
+  const auth = req.get('Authorization');
+   if(!auth){
+    throw new ClientError(401, 'no authorization');
+  }
+
+  const token = auth?.split('Bearer ')[1];
+  if(!token){
+    throw new ClientError(401, 'no token');
+  }
+
+  jwt.verify(token, hashKey, (err,payload) => {
+    if(err){
+      throw new ClientError(401, 'Expired token');
+    }
+     req.user = payload as Request['user'];
+  next();
+  });
+  } catch(err){
+  next(err);
+  }
 }
+
 
 /*
  * Get the 'Authorization' header from the request.
