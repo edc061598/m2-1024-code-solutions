@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { ClientError } from './client-error.js';
-import { nextTick } from 'process';
+
 
 const hashKey = process.env.TOKEN_SECRET ?? '';
 if (!hashKey) throw new Error('TOKEN_SECRET not found in env');
@@ -13,6 +13,7 @@ export function authMiddleware(
   next: NextFunction
 ): void {
   /* your code here */
+
 try{
   const auth = req.get('Authorization');
    if(!auth){
@@ -34,6 +35,9 @@ try{
   } catch(err){
   next(err);
   }
+}
+
+
 }
 
 

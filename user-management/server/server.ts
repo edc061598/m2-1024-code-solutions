@@ -5,7 +5,7 @@ import argon2 from 'argon2';
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { ClientError, errorMiddleware, authMiddleware } from './lib/index.js';
-import { json } from 'stream/consumers';
+
 
 type User = {
   userId: number;
@@ -36,6 +36,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     if (!username || !password) {
       throw new ClientError(400, 'username and password are required fields');
     }
+
        const hashedPassword = await argon2.hash(password);
           const sql =  `
     insert into "users" ("username", "hashedPassword")
@@ -50,6 +51,9 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
           }
 
           return res.status(201).json(userResult);
+
+    throw new Error('Not implemented');
+
     /* TODO:
      * Delete the "Not implemented" error.
      * Hash the user's password with `argon2.hash()` (note that this method is async)
@@ -71,6 +75,7 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
     if (!username || !password) {
       throw new ClientError(401, 'invalid login');
     }
+
     const sql = `
     select "userId",
     "hashedPassword"
@@ -95,6 +100,9 @@ if(!passwordMatch){
 
   const signedToken = jwt.sign(payload, hashKey);
  return res.status(200).json({payload, signedToken});
+
+
+    throw new Error('Not implemented');
 
     /* TODO:
      * Delete the "Not implemented" error.
