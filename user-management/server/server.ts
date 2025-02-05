@@ -6,6 +6,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import { ClientError, errorMiddleware, authMiddleware } from './lib/index.js';
 
+
 type User = {
   userId: number;
   username: string;
@@ -35,7 +36,24 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
     if (!username || !password) {
       throw new ClientError(400, 'username and password are required fields');
     }
+
+       const hashedPassword = await argon2.hash(password);
+          const sql =  `
+    insert into "users" ("username", "hashedPassword")
+    values ($1,$2)
+    returning "username", "userId", "createdAt";`
+    ;
+    const body = [username, hashedPassword];
+          const result = await db.query(sql, body);
+          const userResult = result.rows[0];
+          if(!userResult){
+            throw new ClientError(404, 'user not found');
+          }
+
+          return res.status(201).json(userResult);
+
     throw new Error('Not implemented');
+
     /* TODO:
      * Delete the "Not implemented" error.
      * Hash the user's password with `argon2.hash()` (note that this method is async)
@@ -45,6 +63,7 @@ app.post('/api/auth/sign-up', async (req, res, next) => {
      *
      * Hint: Insert statements can include a `returning` clause to retrieve the inserted row(s).
      */
+
   } catch (err) {
     next(err);
   }
@@ -56,7 +75,35 @@ app.post('/api/auth/sign-in', async (req, res, next) => {
     if (!username || !password) {
       throw new ClientError(401, 'invalid login');
     }
+
+    const sql = `
+    select "userId",
+    "hashedPassword"
+    from "users"
+    where "username" = $1;
+    `;
+const result = await db.query(sql , [username]);
+const user = result.rows[0];
+if(!user) {
+  throw new ClientError(401, 'user not found');
+}
+
+const passwordMatch = await argon2.verify(user.hashedPassword, password);
+if(!passwordMatch){
+  throw new ClientError(401, 'password is not found');
+}
+
+  const payload = {
+    user: user.userId,
+    username: user.username,
+  }
+
+  const signedToken = jwt.sign(payload, hashKey);
+ return res.status(200).json({payload, signedToken});
+
+
     throw new Error('Not implemented');
+
     /* TODO:
      * Delete the "Not implemented" error.
      * Query the database to find the "userId" and "hashedPassword" for the "username".
